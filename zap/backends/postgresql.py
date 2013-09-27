@@ -14,7 +14,11 @@ class LocalPostgresZap(ZapBase):
         if not 'postgres' in [p[0] for p in pwd.getpwall()]:
             return False
 
-        if not self.host == '':
+        if not (
+            self.host == '' or \
+            self.host == 'localhost' or \
+            self.host.startswith('127.')
+            ):
             return False
 
         if 'postgresql' in self.engine:
