@@ -20,6 +20,7 @@ setup(
     keywords='django isotoma zap',
     author='Alex Holmes',
     author_email='alex.holmes@isotoma.com',
+    license='Apache Software License',
     url='https://www.isotoma.com/open-source/',
     install_requires=[
         'setuptools',
