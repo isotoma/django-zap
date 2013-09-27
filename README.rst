@@ -16,6 +16,11 @@ django's ``syncdb`` command. This tool uses the database settings in your
 settings file to prevent you having to duplicate them in some separate database
 drop/create script.
 
+How?
+----
+
+Just add ``zap`` to your installed apps.
+
 Backends
 --------
 
