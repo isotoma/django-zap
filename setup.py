@@ -1,7 +1,7 @@
 import os
 from setuptools import setup, find_packages
 
-version = '0.0.0'
+version = '0.0.1'
 
 def fread(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
@@ -16,7 +16,7 @@ setup(
         'Programming Language :: Python',
         'Environment :: Web Environment',
     ],
-    packages=['zap',],
+    packages=find_packages(),
     keywords='django isotoma zap',
     author='Alex Holmes',
     author_email='alex.holmes@isotoma.com',
@@ -26,6 +26,8 @@ setup(
         'setuptools',
         'Django',
     ],
+    zip_safe=False,
+    include_package_data=True,
 )
 
 
