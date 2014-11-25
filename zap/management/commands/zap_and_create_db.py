@@ -57,7 +57,7 @@ class Command(BaseCommand):
             self.stderr.write('Warning: running this script as root could ' \
                               'generate troublesome pyc files owned by root!')
 
-        if not kawrgs['nozap']:
+        if not kwargs['nozap']:
             self.zap()
 
         created = self.create()
