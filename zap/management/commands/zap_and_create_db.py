@@ -46,12 +46,6 @@ class Command(BaseCommand):
         )
     )
 
-    def __init__(self, *args, **kwargs):
-        super(Command, self).__init__(*args, **kwargs)
-        parser = OptionParser()
-        parser.add_options(self.option_list)
-        self.options, _ = parser.parse_args()
-
     def handle(self, *args, **kwargs):
         try:
             self.backend = get_backend()
@@ -63,16 +57,16 @@ class Command(BaseCommand):
             self.stderr.write('Warning: running this script as root could ' \
                               'generate troublesome pyc files owned by root!')
 
-        if not self.options.nozap:
+        if not kawrgs['nozap']:
             self.zap()
 
         created = self.create()
 
-        if created and self.options.syncdb:
-            call_command('syncdb', interactive=(not self.options.noinput))
+        if created and kwargs['syncdb']:
+            call_command('syncdb', interactive=(not kwargs['noinput']))
 
-        if created and self.options.migrate:
-            call_command('migrate', interactive=(not self.options.noinput))
+        if created and kwargs['migrate']:
+            call_command('migrate', interactive=(not kwargs['noinput']))
 
     def zap(self):
         self.stdout.write('Attempting to DROP database')
