@@ -8,7 +8,7 @@ class LocalPostgresZap(ZapBase):
     """ zap and create a local running postgresql instance """
 
     def can_zap(self):
-        if not 'linux' in sys.platform:
+        if not 'linux' and not 'darwin' in sys.platform:
             return False
 
         if not 'postgres' in [p[0] for p in pwd.getpwall()]:
@@ -34,6 +34,7 @@ class LocalPostgresZap(ZapBase):
         base_command += command
         p = subprocess.Popen(
             base_command,
+            cwd='/tmp',
             stdout=sys.stdout,
             stderr=sys.stderr,
             stdin=sys.stdin,
