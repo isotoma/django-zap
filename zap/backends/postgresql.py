@@ -4,6 +4,7 @@ import subprocess
 
 from .base import ZapBase
 
+
 class LocalPostgresZap(ZapBase):
     """ zap and create a local running postgresql instance """
 
@@ -18,7 +19,7 @@ class LocalPostgresZap(ZapBase):
             self.host == '' or \
             self.host == 'localhost' or \
             self.host.startswith('127.')
-            ):
+            ):                                  # flake8: noqa
             return False
 
         if 'postgresql' in self.engine:
@@ -33,7 +34,7 @@ class LocalPostgresZap(ZapBase):
             port_string = '{port}'.format(port=self.port)
             base_command += ['-p', port_string]
         base_command.append('-c')
-        base_command += command      
+        base_command += command
         p = subprocess.Popen(
             base_command,
             cwd='/tmp',

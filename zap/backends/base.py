@@ -1,5 +1,6 @@
 from django.conf import settings
 
+
 class ZapBase(object):
 
     def __init__(self, database='default', **kwargs):
