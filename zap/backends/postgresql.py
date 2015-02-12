@@ -28,10 +28,12 @@ class LocalPostgresZap(ZapBase):
         ''' Run a command via psql as the postgres user '''
         if self.debug:
             sys.stderr.write('psql -c "' + ' '.join(command) + '"\n')
-        port_string = '{port}'.format(port=self.port)
-        base_command = ['sudo', '-u', 'postgres',
-                        'psql', '-p', port_string, '-c']
-        base_command += command
+        base_command = ['sudo', '-u', 'postgres', 'psql']
+        if self.port:
+            port_string = '{port}'.format(port=self.port)
+            base_command += ['-p', port_string]
+        base_command.append('-c')
+        base_command += command      
         p = subprocess.Popen(
             base_command,
             cwd='/tmp',
