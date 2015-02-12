@@ -1,6 +1,14 @@
 Changelog
 =========
 
+0.0.3 (unreleased)
+------------------
+
+- Adds OSX detection
+- Adds port option for postgres backend
+- Changes working directory of postgres subprocess command to /tmp
+
+
 0.0.2 (2014-11-25)
 ------------------
 
