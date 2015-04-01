@@ -43,6 +43,12 @@ class Command(BaseCommand):
             default=False,
             action='store_true',
             help='Run migrate after a successful zap and creation',
+        ),
+        make_option(
+            '--dropconnections',
+            default=False,
+            action='store_true',
+            help='Force dropping existing DB connections'
         )
     )
 
@@ -57,6 +63,7 @@ class Command(BaseCommand):
             self.stderr.write('Warning: running this script as root could ' \
                               'generate troublesome pyc files owned by root!')
 
+        self.backend.dropconnections = kwargs['dropconnections']
         if not kwargs['nozap']:
             self.zap()
 
