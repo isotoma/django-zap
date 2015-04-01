@@ -1,10 +1,13 @@
 Changelog
 =========
 
-0.0.4 (unreleased)
+0.0.4 (2015-04-01)
 ------------------
 
-- Nothing changed yet.
+- #3 Adds a new flag ``--dropconnections``, disabled by default, that tells
+  postgres to terminate all existing sessions before zapping. This is to work
+  around an issue where third party applications open database connections
+  upon app registry installation.
 
 
 0.0.3 (2015-02-12)
