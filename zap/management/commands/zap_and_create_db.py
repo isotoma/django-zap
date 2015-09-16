@@ -54,7 +54,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         try:
-            self.backend = get_backend()
+            self.backend = get_backend(database=kwargs['database'])
         except NoBackendError:
             self.stderr.write('Cannot zap and create - no appropriate backend')
             raise SystemExit(1)
@@ -76,7 +76,7 @@ class Command(BaseCommand):
             call_command('migrate', interactive=(not kwargs['noinput']))
 
     def zap(self):
-        self.stdout.write('Attempting to DROP database')
+        self.stdout.write('Attempting to DROP database: {}'.format(self.backend.name))
         if not self.backend.zap_db():
             self.stderr.write('Could not DROP database... perhaps it does not exist yet')
 
@@ -93,7 +93,7 @@ class Command(BaseCommand):
             ok = False
 
         if not self.backend.create_db():
-            self.stderr.write('Could not create database')
+            self.stderr.write('Could not create database: {}'.format(self.backend.name))
             ok = False
 
         return ok

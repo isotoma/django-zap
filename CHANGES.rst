@@ -4,7 +4,8 @@ Changelog
 0.0.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- database argument now passed to backend in support of multiple database 
+  setups.
 
 
 0.0.4 (2015-04-01)
