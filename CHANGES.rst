@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.0.5 (unreleased)
+0.0.5 (2015-09-16)
 ------------------
 
 - database argument now passed to backend in support of multiple database 
