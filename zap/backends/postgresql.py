@@ -58,6 +58,11 @@ class LocalPostgresZap(ZapBase):
             self._terminate_connections()
         return self._psql('DROP DATABASE {0}'.format(self.name))
 
+    def zap_test(self):
+        if self.dropconnections:
+            self._terminate_connections()
+        return self._psql('DROP DATABASE {0}'.format(self.test_name))
+
     def create_user(self):
         # allow the user createdb permissions for running tests if DEBUG=True
         db_perms = 'CREATEDB' if self.debug else 'NOCREATEDB'

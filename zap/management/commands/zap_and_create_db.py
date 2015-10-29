@@ -49,7 +49,13 @@ class Command(BaseCommand):
             default=False,
             action='store_true',
             help='Force dropping existing DB connections'
-        )
+        ),
+        make_option(
+            '--droptest',
+            default=False,
+            action='store_true',
+            help='Drop the test database',
+        ),
     )
 
     def handle(self, *args, **kwargs):
@@ -60,10 +66,14 @@ class Command(BaseCommand):
             raise SystemExit(1)
 
         if os.geteuid() == 0:
-            self.stderr.write('Warning: running this script as root could ' \
+            self.stderr.write('Warning: running this script as root could ' +
                               'generate troublesome pyc files owned by root!')
 
         self.backend.dropconnections = kwargs['dropconnections']
+
+        if kwargs['droptest']:
+            self.zap_test()
+
         if not kwargs['nozap']:
             self.zap()
 
@@ -74,6 +84,11 @@ class Command(BaseCommand):
 
         if created and kwargs['migrate']:
             call_command('migrate', interactive=(not kwargs['noinput']))
+
+    def zap_test(self):
+        self.stdout.write('Attempting to DROP test database {}'.format(self.backend.test_name))
+        if not self.backend.zap_test():
+            self.stderr.write('Could not DROP test database {}'.format(self.backend.test_name))
 
     def zap(self):
         self.stdout.write('Attempting to DROP database: {}'.format(self.backend.name))

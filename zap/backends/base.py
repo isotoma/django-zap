@@ -14,6 +14,10 @@ class ZapBase(object):
         self.database = database
         self.kwargs = kwargs
 
+    @property
+    def test_name(self):
+        return 'test_{0}'.format(self.name)
+
     def can_zap(self):
         return False
 
