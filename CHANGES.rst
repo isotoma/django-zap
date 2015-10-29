@@ -1,10 +1,11 @@
 Changelog
 =========
 
-0.0.6 (unreleased)
+0.0.6 (2015-10-29)
 ------------------
 
-- Nothing changed yet.
+- Adds ``--droptest`` argument, which also drops the test database. This
+  feature is aimed at people using --keepdb to speed up their test runs.
 
 
 0.0.5 (2015-09-16)
