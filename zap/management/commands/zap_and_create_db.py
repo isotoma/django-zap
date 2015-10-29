@@ -29,7 +29,7 @@ class Command(BaseCommand):
             '--noinput',
             default=False,
             action='store_true',
-            help='Do not require any input from the user - note that any ' \
+            help='Do not require any input from the user - note that any ' +
                  'calls to sudo made by the backends may still require input',
         ),
         make_option(

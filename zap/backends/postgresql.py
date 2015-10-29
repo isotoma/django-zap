@@ -45,14 +45,17 @@ class LocalPostgresZap(ZapBase):
         p.wait()
         return p.returncode == 0
 
+    def _terminate_connections(self):
+        return self._psql("SELECT pg_terminate_backend(pg_stat_activity.pid) \
+            FROM pg_stat_activity WHERE pg_stat_activity.datname = '{}' \
+            AND pid <> pg_backend_pid();".format(self.name))
+
     def zap_user(self):
         return self._psql('DROP ROLE {0}'.format(self.user))
 
     def zap_db(self):
         if self.dropconnections:
-            self._psql("SELECT pg_terminate_backend(pg_stat_activity.pid) \
-            FROM pg_stat_activity WHERE pg_stat_activity.datname = '{}' \
-            AND pid <> pg_backend_pid();".format(self.name))
+            self._terminate_connections()
         return self._psql('DROP DATABASE {0}'.format(self.name))
 
     def create_user(self):
