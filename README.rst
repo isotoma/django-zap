@@ -7,6 +7,9 @@ What?
 
 Automates the destruction and recreation of django databases.
 
+Currently only supports local postgres databases. Feel free to add more
+backends.
+
 Why?
 ----
 
@@ -20,6 +23,13 @@ How?
 ----
 
 Just add ``zap`` to your installed apps.
+
+A new django management command will appear: ``zap_and_create_db``.
+
+Help is at ``python manage.py zap_and_create_db --help`` but the TL;DR is that
+you can run it without arguments and it'll drop the user and database, then
+recreate them. Run it with ``--migrate`` and it'll also run
+``manage.py migrate``.
 
 Backends
 --------
