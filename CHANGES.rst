@@ -4,7 +4,7 @@ Changelog
 0.0.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Replaces option_list with add_arguments
 
 
 0.0.6 (2015-10-29)
@@ -17,7 +17,7 @@ Changelog
 0.0.5 (2015-09-16)
 ------------------
 
-- database argument now passed to backend in support of multiple database 
+- database argument now passed to backend in support of multiple database
   setups.
 
 
