@@ -1,8 +1,10 @@
 Changelog
 =========
 
-0.0.7 (unreleased)
+0.0.7 (2016-10-07)
 ------------------
+
+Now only compatible with django 1.8+
 
 - Replaces option_list with add_arguments
 
