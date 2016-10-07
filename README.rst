@@ -2,6 +2,10 @@
 Django-Zap
 ==========
 
+Compatible with Django 1.8+
+
+For 1.7 compatibility use ``django-zap==0.0.6``
+
 What?
 -----
 
