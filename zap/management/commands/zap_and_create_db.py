@@ -1,5 +1,4 @@
 import os
-from optparse import make_option
 
 from django.core.management.base import BaseCommand
 from django.core.management import call_command
@@ -10,53 +9,52 @@ from zap.exceptions import NoBackendError
 
 class Command(BaseCommand):
 
-    help = 'This management script drops the database and database user ' \
-           '(if they exist) then recreates them.'
+    help = 'This management script drops the database and database user \
+        (if they exist) then recreates them.'
 
-    option_list = BaseCommand.option_list + (
-        make_option(
+    def add_arguments(self, parser):
+        parser.add_argument(
             '--database',
             default='default',
             help='Which database in your django settings to zap and create',
-        ),
-        make_option(
+        )
+        parser.add_argument(
             '--nozap',
             default=False,
             action='store_true',
             help='Do not zap the database and user, only try to create them',
-        ),
-        make_option(
+        )
+        parser.add_argument(
             '--noinput',
             default=False,
             action='store_true',
             help='Do not require any input from the user - note that any ' +
                  'calls to sudo made by the backends may still require input',
-        ),
-        make_option(
+        )
+        parser.add_argument(
             '--syncdb',
             default=False,
             action='store_true',
             help='Run syncdb after a successfull zap and creation',
-        ),
-        make_option(
+        )
+        parser.add_argument(
             '--migrate',
             default=False,
             action='store_true',
             help='Run migrate after a successful zap and creation',
-        ),
-        make_option(
+        )
+        parser.add_argument(
             '--dropconnections',
             default=False,
             action='store_true',
             help='Force dropping existing DB connections'
-        ),
-        make_option(
+        )
+        parser.add_argument(
             '--droptest',
             default=False,
             action='store_true',
             help='Drop the test database',
-        ),
-    )
+        )
 
     def handle(self, *args, **kwargs):
         try:
